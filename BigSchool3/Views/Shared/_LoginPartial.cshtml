@@ -10,8 +10,9 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                aria-expanded="false">@User.Identity.GetUserName()<span class="caret"></span></a>
             <ul class="dropdown-menu">
-                <li><a href="#">Course I`m Going</a></li>
-                <li><a href="#">Course I`m Folwing</a></li>
+                <li><a href="@Url.Action("Mine","Courses")">My Upcoming</a></li>
+                <li><a href="@Url.Action("Attending","Courses")">Course I`m Going</a></li>
+                <li><a href="@Url.Action("Following","Courses")">Course I`m Folwing</a></li>
                 <li class="divider" role="separator"></li>
                 <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
             </ul>

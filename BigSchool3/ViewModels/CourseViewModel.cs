@@ -10,15 +10,17 @@ namespace BigSchool3.ViewModels
 {
     public class CourseViewModel
     {
-        [Required(ErrorMessage = "Bắt buộc nhập")]
+        public int Id { get; set; }
+
+        [Required]
         public string Place { get; set; }
-        [Required(ErrorMessage = "Bắt buộc nhập")]
+        [Required]
         [FutureDate]
         public string Date { get; set; }
-        [Required(ErrorMessage = "Bắt buộc nhập")]
+        [Required]
         [ValidTime]
         public string Time { get; set; }
-        [Required(ErrorMessage = "Bắt buộc nhập")]
+        [Required]
         public byte Category { get; set; }
         public IEnumerable<Category> Categoies { get; set; }
         public DateTime GetDateTime()
@@ -27,5 +29,7 @@ namespace BigSchool3.ViewModels
 
             return DateTime.ParseExact(dateInString, "d/M/yyyy hh:mm", CultureInfo.InvariantCulture);
         }
+        public string Heading { get; set; }
+        public string Action { get { return (Id != 0) ? "Update" : "Create"; }  }
     }
 }

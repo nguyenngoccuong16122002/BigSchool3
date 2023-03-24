@@ -1,7 +1,8 @@
 ﻿@model BigSchool3.ViewModels.CoursesViewModel
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Attending";
 }
+<h2>Attending</h2>
 <div class="course">
     <ul class="course">
         @foreach (var course in Model.UpcommingCourses)
@@ -30,9 +31,9 @@
                     </span>
                     @if (Model.ShowAction)
                     {
-                       <button data-course-id="@course.Id" class="btn btn-default btn-sm js-toggle-attendance">Going?</button>
+                        <button data-course-id="@course.Id" class="btn btn-default btn-sm js-toggle-attendance">Going?</button>
                     }
-                    
+
                 </div>
             </li>
         }
@@ -53,7 +54,7 @@
                     .fail(function () {
                         alert("something failed!");
                     });
-              
+                
             });
 
             $(".js-toggle-follow").click(function (e) {
@@ -65,11 +66,10 @@
                     .fail(function () {
                         alert("something failed!");
                     });
-               
             });
         });
 
-       
+
     </script>
 
 }
