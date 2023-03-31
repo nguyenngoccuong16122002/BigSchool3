@@ -40,36 +40,40 @@
 </div>
 @section scripts{
     <script>
-        $(document).ready(function () {
-            $(".js-toggle-attendance").click(function (e) {
+            $(document).ready(function () {
+                CoursesController.init();
+
+            $(".js-togegle-follow").click(function (e) {
                 var button = $(e.target);
-                $.post("/api/attendances", { courseId: button.attr("data-course-id") })
+            if (button.hasClass("btn-link")) {
+                $.post("/api/followings", { followeeId: button.attr("data-user-id") })
                     .done(function () {
                         button
-                            .removeClass("btn-deafault")
-                            .addClass("btn-info")
-                            .text("Going");
+                            .removeClass("btn-link")
+                            .addClass("btn-success")
+                            .text("Following");
                     })
                     .fail(function () {
-                        alert("something failed!");
+                        alert("Something failed!");
                     });
-              
-            });
-
-            $(".js-toggle-follow").click(function (e) {
-                var button = $(e.target);
-                $.post("/api/followings", { courseId: button.attr("data-user-id") })
+                } else {
+                $.ajax({
+                    url: "/api/followings/" + button.attr("data-user-id"),
+                    method: "DELETE"
+                })
                     .done(function () {
-                        button.text("Following");
+                        button
+                            .removeClass("btn-success")
+                            .addClass("btn-link")
+                            .text("Follow");
                     })
                     .fail(function () {
-                        alert("something failed!");
+                        alert("Something failed 2!");
                     });
-               
-            });
+                }
+                
+            })
         });
-
-       
     </script>
 
 }

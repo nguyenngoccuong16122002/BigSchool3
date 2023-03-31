@@ -13,6 +13,8 @@ namespace BigSchool3.Models
         public DbSet<Category> Categories { get; set; }
         public DbSet<Attendance> Attendances { get; set; }  
         public DbSet<Following> followings { get; set; }
+        //public DbSet<Notification> Notifications { get; set; }
+       // public DbSet<UserNotification> userNotifications { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
@@ -28,6 +30,12 @@ namespace BigSchool3.Models
                 .HasRequired(a => a.Course)
                 .WithMany()
                 .WillCascadeOnDelete(false);
+
+            //modelBuilder.Entity<UserNotification>()
+            //     .HasRequired(a => a.User)
+            //     .WithMany()
+            //     .WillCascadeOnDelete(false);
+
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<ApplicationUser>()

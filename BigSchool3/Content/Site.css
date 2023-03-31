@@ -23,10 +23,14 @@ textarea {
     max-width: 280px;
 }
 
-.navbar-inverse .navbar-toggle:hover,
-.navbar-inverse .navbar-toggle:focus {
-    background-color: #777;
-    border-color: #fff
+.navbar-inverse {
+    background-color: #d41d50 !important;
+    border-color: #fbf6f6 !important;
+}
+
+
+.navbar-inverse .navbar-brand {
+    color: white;
 }
 
 .course {
@@ -40,8 +44,8 @@ textarea {
 
         .course > li .date {
             text-align: center;
-            background-color: #d41d50;
-            color: #ffff;
+            background-color: #ff0000;
+            color: white;
             width: 60px;
             border-radius: 8px;
         }
@@ -51,11 +55,20 @@ textarea {
             top: 0;
             left: 70px;
         }
-        .course > li > .action {
-           display:none;
-           left:70px;
-           position:absolute;
+
+        .course > li .lecture {
         }
+
+        .course > li .category {
+            display: block;
+        }
+
+        .course > li .action {
+            display: none;
+            left: 70px;
+            position: absolute;
+        }
+
         .course > li:hover .action {
-            display:block;
-        }
+            display: block
+        }}

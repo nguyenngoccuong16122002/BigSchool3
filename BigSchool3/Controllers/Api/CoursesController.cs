@@ -26,8 +26,28 @@ namespace BigSchool3.Controllers.Api
                 return NotFound();
             }
             course.IsCanceled = true;
+
+            //var notification=new Notification()
+            //{
+            //    DateTime = DateTime.Now,
+            //    Course=course,
+            //    Type=NotificationType.CourseCanceled
+            //};
+            //var attendees = _dbContext.Attendances.Where(a => a.CourseId == course.Id)
+            //    .Select(a => a.Attendee).ToList();
+            //foreach(var attendance in attendees)
+            //{
+            //    var userNotification = new UserNotification()
+            //    {
+            //        User = attendance,
+            //        Notification = notification
+            //    };
+            //    _dbContext.userNotifications.Add(userNotification);
+            //}
             _dbContext.SaveChanges();
             return Ok();
         }
+
+       
     }
 }

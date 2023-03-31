@@ -26,7 +26,7 @@ namespace BigSchool3.Controllers
                 Categoies = _dbContext.Categories.ToList(),
                 Heading="Add Course"
             };
-            return View("CoureseForm",vieModel);
+            return View("CoureseForm", vieModel);
             
         }
         [Authorize]
@@ -37,7 +37,7 @@ namespace BigSchool3.Controllers
             if (!ModelState.IsValid)
             {
                 viewModel.Categoies = _dbContext.Categories.ToList();
-                return View("Create",viewModel);
+                return View("CoureseForm", viewModel);
             } 
             var course = new Course
             {
