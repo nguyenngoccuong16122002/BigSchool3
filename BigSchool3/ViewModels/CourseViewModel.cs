@@ -27,7 +27,7 @@ namespace BigSchool3.ViewModels
         {
             string dateInString = string.Format("{0} {1}", Date, Time);
 
-            return DateTime.ParseExact(dateInString, "d/M/yyyy hh:mm", CultureInfo.InvariantCulture);
+            return DateTime.ParseExact(dateInString, "dd/M/yyyy hh:mm", CultureInfo.InvariantCulture);
         }
         public string Heading { get; set; }
         public string Action { get { return (Id != 0) ? "Update" : "Create"; }  }

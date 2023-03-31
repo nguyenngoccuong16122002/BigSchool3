@@ -2,6 +2,8 @@
 @{
     ViewBag.Title = "Home Page";
 }
+@using BigSchool3.Models;
+@using Microsoft.AspNet.Identity;
 <div class="course">
     <ul class="course">
         @foreach (var course in Model.UpcommingCourses)
@@ -30,48 +32,58 @@
                     </span>
                     @if (Model.ShowAction)
                     {
-                       <button data-course-id="@course.Id" class="btn btn-default btn-sm js-toggle-attendance">Going?</button>
+                        var userId = User.Identity.GetUserId();
+                        ApplicationDbContext _dbContext = new ApplicationDbContext();
+                        bool isGoing = _dbContext.Attendances.Any(a => a.CourseId == course.Id && a.AttendeeId == userId);
+                        if (!isGoing)
+                        {
+                            <button data-course-id="@course.Id" class="btn btn-default btn-sm js-toggle-attendance">Going?</button>
+                        }
+                        else
+                        {
+                            <button class="btn-done">Going</button>
+                        }
                     }
-                    
+
                 </div>
             </li>
-        }
+}
     </ul>
 </div>
 @section scripts{
     <script>
-            $(document).ready(function () {
-                CoursesController.init();
+        $(document).ready(function () {
+            CoursesController.init();
 
             $(".js-togegle-follow").click(function (e) {
                 var button = $(e.target);
-            if (button.hasClass("btn-link")) {
-                $.post("/api/followings", { followeeId: button.attr("data-user-id") })
-                    .done(function () {
-                        button
-                            .removeClass("btn-link")
-                            .addClass("btn-success")
-                            .text("Following");
-                    })
-                    .fail(function () {
-                        alert("Something failed!");
-                    });
+                if (button.hasClass("btn-link")) {
+                    $.post("/api/followings", { followeeId: button.attr("data-user-id") })
+                        .done(function () {
+                            button
+                                .removeClass("btn-link")
+                                .addClass("btn-success")
+                                .text("Following");
+                        })
+                        .fail(function () {
+                            alert("Something failed!");
+                        });
                 } else {
-                $.ajax({
-                    url: "/api/followings/" + button.attr("data-user-id"),
-                    method: "DELETE"
-                })
-                    .done(function () {
-                        button
-                            .removeClass("btn-success")
-                            .addClass("btn-link")
-                            .text("Follow");
+                    $.ajax({
+                        url: "/api/followings/" + button.attr("data-user-id"),
+                        method: "DELETE"
                     })
-                    .fail(function () {
-                        alert("Something failed 2!");
-                    });
+                        .done(function () {
+                            button
+                                .removeClass("btn-success")
+                                .addClass("btn-link")
+                                .text("Follow");
+                        })
+                        .fail(function () {
+                            alert("Something failed 2!");
+                        });
                 }
-                
+
             })
         });
     </script>

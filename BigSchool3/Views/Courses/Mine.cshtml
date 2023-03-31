@@ -29,7 +29,9 @@
             </div>
             <div class="action">
                 <a href="@Url.Action("Edit", "Courses", new { id = course.Id })">Edit</a> |
-                <a href="#" class="js-cancel-course" date-course-id="@course.Id">Delete</a>
+                @Html.ActionLink("Cancel",
+      "Delete", "Courses", new { id = course.Id },
+      new { onclick = "return confirm('Do you really want to delete ?')" })
             </div>
         </li>
 
@@ -55,7 +57,7 @@
                     },
                     callback: function (result) {
                         if (result) {
-                            $.ajax({ url: "/api/courses/" + link.attr("date-course-id"), method: "DELETE" })
+                            $.ajax({ url: "/Delete/Courses/" + link.attr("date-course-id"), method: "DELETE" })
                                 .done(function () {
                                     link.parents("li").fadeOut(function () {
                                         $(this).remove();

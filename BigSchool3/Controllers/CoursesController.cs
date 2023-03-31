@@ -89,6 +89,19 @@ namespace BigSchool3.Controllers
             return RedirectToAction("Index","Home");
         }
 
+        public ActionResult Delete(int? id)
+        {
+            if(id == null)
+            {
+                return View();
+            }
+            var course = _dbContext.Courses.Single(c => c.Id==id);
+            _dbContext.Courses.Remove(course);
+            _dbContext.SaveChanges();
+
+            return RedirectToAction("Index", "Home");
+        }
+
         [Authorize]
         public ActionResult Attending()
         {
@@ -125,12 +138,12 @@ namespace BigSchool3.Controllers
         {
             var userId = User.Identity.GetUserId();
             var courese = _dbContext.Courses
-                .Where(a => a.LecturerId == userId && a.DateTime>DateTime.Now)
-                
+                .Where(a => a.LecturerId == userId && a.DateTime > DateTime.Now)
+
                 .Include(l => l.Lecturer)
                 .Include(l => l.Category)
                 .ToList();
-          
+
             return View(courese);
         }
     }
